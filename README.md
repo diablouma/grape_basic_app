@@ -7,6 +7,9 @@ You need to Install:
   MongoDB
   Go inside project folder and run bundle install to download all the dependencies.
 
+#Tests
+Tests are built using Rspec
+
 #Running the app:
   Run mongo db:
   `$ mongo`
