@@ -17,7 +17,8 @@ Tests are built using Rspec
   Go inside project folder
   `rackup config.ru`
 
-  The application now is running on port 9292
+  The application now is running on port 9292, to test it you can go to:
+  `http://localhost:9292/api/cars/car`
 
 #Running test:
   Go inside project folder
