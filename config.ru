@@ -10,3 +10,4 @@ use Rack::Cors do
 end
 
 run Car::API
+run Comments::API
