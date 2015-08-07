@@ -10,10 +10,29 @@ module Comments
 
     resource :comments do
       get do
-        return [
-          {key:"1", author: "Pete Hunt", text: "This is one comment"},
-          {key:"2", author: "Jordan Walke", text: "This is *another* comment"}
-        ]
+        client = get_client()
+        cursor = client[:comments].find()
+        results = []
+
+        cursor.each do |doc|
+          results.push(doc)
+        end
+
+        return results
+      end
+
+      post do
+        client = get_client()
+        result = client[:comments].insert_one(params)
+        client = get_client()
+        cursor = client[:comments].find()
+        results = []
+
+        cursor.each do |doc|
+          results.push(doc)
+        end
+
+        return results
       end
     end
   end
