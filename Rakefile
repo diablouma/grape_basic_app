@@ -5,3 +5,7 @@ RSpec::Core::RakeTask.new
 
 task :default => :spec
 task :test => :spec
+
+task :app do
+  sh "rackup config.ru --host 0.0.0.0 --port 9292"
+end
