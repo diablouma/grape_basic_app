@@ -13,7 +13,8 @@ describe Repository do
                                 g.yield Hash["title", "amazing post 2"]}
     allow(@collection).to receive(:find).and_return(posts)
 
-    expected_posts = [{"title" => "amazing post 1"}, {"title" => "amazing post 2"}]
+    expected_posts = [{"title" => "amazing post 1"},
+                      {"title" => "amazing post 2"}]
     posts = repository.all_posts
 
     expect(posts).to eq expected_posts

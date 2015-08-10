@@ -17,4 +17,8 @@ class Repository
   def insert collection, document
     @mongo_client[:posts].insert_one(document)
   end
+
+  def delete_all collection
+    @mongo_client[collection].drop
+  end
 end
