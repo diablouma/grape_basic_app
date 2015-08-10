@@ -1,4 +1,3 @@
-require_relative 'car'
 require_relative 'comments'
 require 'rack/cors'
 
@@ -9,5 +8,4 @@ use Rack::Cors do
   end
 end
 
-run Car::API
 run Comments::API
