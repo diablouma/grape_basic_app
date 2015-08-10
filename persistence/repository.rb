@@ -5,8 +5,8 @@ class Repository
     @mongo_client = mongo_client
   end
 
-  def all_posts
-    cursor = @mongo_client[:posts].find()
+  def all collection
+    cursor = @mongo_client[collection].find()
     results = []
     cursor.each do |doc|
       results.push(doc)
@@ -15,7 +15,7 @@ class Repository
   end
 
   def insert collection, document
-    @mongo_client[:posts].insert_one(document)
+    @mongo_client[collection].insert_one(document)
   end
 
   def delete_all collection

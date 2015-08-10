@@ -1,6 +1,6 @@
 require 'grape'
 require 'json'
-require_relative 'persistence/mongo_client'
+require_relative 'factories/repository_factory'
 
 module Comments
   class API < Grape::API
@@ -10,29 +10,14 @@ module Comments
 
     resource :comments do
       get do
-        client = get_client()
-        cursor = client[:comments].find()
-        results = []
-
-        cursor.each do |doc|
-          results.push(doc)
-        end
-
-        return results
+        repository = RepositoryFactory.create_repository
+        return repository.all :comments
       end
 
       post do
-        client = get_client()
-        result = client[:comments].insert_one(params)
-        client = get_client()
-        cursor = client[:comments].find()
-        results = []
-
-        cursor.each do |doc|
-          results.push(doc)
-        end
-
-        return results
+        repository = RepositoryFactory.create_repository
+        repository.insert :comments, params
+        return repository.all :comments
       end
     end
   end

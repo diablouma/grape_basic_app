@@ -15,7 +15,7 @@ describe Repository do
 
     expected_posts = [{"title" => "amazing post 1"},
                       {"title" => "amazing post 2"}]
-    posts = repository.all_posts
+    posts = repository.all :posts
 
     expect(posts).to eq expected_posts
   end

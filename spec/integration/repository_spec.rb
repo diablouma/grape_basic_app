@@ -12,7 +12,8 @@ describe Repository do
     post = {"title" => "my post", "content" => "my content"}
 
     @repository.insert :posts, post
-    inserted_post = @repository.all_posts[0]
+    posts = @repository.all :posts
+    inserted_post = posts[0]
 
     expect(inserted_post["title"]).to eq(post["title"])
     expect(inserted_post["content"]).to eq(post["content"])
@@ -23,7 +24,7 @@ describe Repository do
     @repository.insert :posts, post
 
     @repository.delete_all :posts
-    documents = @repository.all_posts
+    documents = @repository.all :posts
 
     expect(documents).to be_empty
   end
