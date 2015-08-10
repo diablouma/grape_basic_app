@@ -13,4 +13,8 @@ class Repository
     end
     return results
   end
+
+  def insert collection, document
+    @mongo_client[:posts].insert_one(document)
+  end
 end
