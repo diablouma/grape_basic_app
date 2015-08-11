@@ -2,12 +2,17 @@
 require "rspec/core/rake_task"
 
 task :app do
-  puts "Starting App on port 9292"
-  sh "rackup config.ru --host 0.0.0.0 --port 9292"
+  sh "cowsay '** Starting App on port 9292 **'"
+  sh "nohup rackup config.ru --host 0.0.0.0 --port 9292 > app.log &"
+end
+
+task :app_stop do
+  sh "cowsay '** Stopping the App **'"
+  sh "pkill -f rackup"
 end
 
 task :test_unit do
-  puts "Running unit tests"
+  sh "cowsay Running unit tests"
   RSpec::Core::RakeTask.new :spec do |task|
     task.pattern = 'spec/unit/*_spec.rb'
   end
@@ -15,7 +20,7 @@ task :test_unit do
 end
 
 task :test_integration do
-  puts "Running integration tests"
+  sh "cowsay integration tests"
   RSpec::Core::RakeTask.new :spec do |task|
     task.pattern = 'spec/integration/*_spec.rb'
   end
@@ -23,7 +28,7 @@ task :test_integration do
 end
 
 task :test_functional do
-  puts "Running functional tests"
+  sh "cowsay Running functional tests"
   RSpec::Core::RakeTask.new :spec do |task|
     task.pattern = 'spec/functional/*_spec.rb'
   end
