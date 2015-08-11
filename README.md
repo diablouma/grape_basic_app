@@ -23,17 +23,19 @@ If you are not using Vagrant (but I recomend using it), you will need to install
 
   `http://localhost:9292/api/comments`
 
+  Run `rake app_stop` to stop the app
+
 ##Tests
 
 Tests are built using Rspec
 
 ##Running tests:
-  While in the root of the project run `$ rake test`. This will run every test in the project. 
-  
+  While in the root of the project run `$ rake test`. This will run every test in the project.
+
   You can run different kinds of tests by doing:
-  
+
   `$ rake test_unit` for unit tests
-  
+
   `$ rake test_integration` for integration tests
-  
+
   `$ rake test_functional` for functional tests
