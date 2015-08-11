@@ -4,7 +4,7 @@ describe Repository do
   before :each do
     mongo_host = '127.0.0.1:27017'
     db_name = 'blog_test'
-    @mongo_client = Mongo::Client.new([mongo_host], database: db_name)
+    @mongo_client = Mongo::Client.new [mongo_host], database: db_name
     @repository = Repository.new @mongo_client
   end
 

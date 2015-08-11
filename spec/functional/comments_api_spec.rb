@@ -31,7 +31,7 @@ describe Grape::API do
     end
 
     after :each do
-      @repository. delete_all :comments
+      @repository.delete_all :comments
     end
   end
 end
