@@ -20,7 +20,7 @@ describe Repository do
   end
 
   it "deletes all documents in a collection" do
-    post = {"title": "some title", "content": "some content"}
+    post = {"title"=> "some title", "content"=> "some content"}
     @repository.insert :posts, post
 
     @repository.delete_all :posts

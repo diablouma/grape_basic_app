@@ -1,4 +1,4 @@
-require './comments'
+require './blog_post'
 require 'rack/test'
 require './persistence/repository'
 require './factories/repository_factory'

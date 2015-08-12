@@ -4,13 +4,14 @@ describe Grape::API do
   include Rack::Test::Methods
 
   def app
-    Comments::API
+    BlogPosts::API
   end
 
-  describe Comments::API do
+  describe BlogPosts::API do
 
     before :each do
       @repository = RepositoryFactory.create_repository
+      @repository.delete_all :comments
     end
 
     describe 'GET /api/comments' do
