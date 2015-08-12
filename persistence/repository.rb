@@ -21,4 +21,15 @@ class Repository
   def delete_all collection
     @mongo_client[collection].drop
   end
+
+  def get_last collection
+    cursor = @mongo_client[collection].find
+    result = nil
+    cursor.each do |doc|
+      result = doc
+      break
+    end
+
+    return result
+  end
 end

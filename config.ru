@@ -1,4 +1,5 @@
 require_relative 'comments'
+require_relative 'blog_post'
 require 'rack/cors'
 
 use Rack::Cors do
@@ -8,4 +9,4 @@ use Rack::Cors do
   end
 end
 
-run Comments::API
+run BlogPosts::API
