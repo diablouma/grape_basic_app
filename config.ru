@@ -1,4 +1,3 @@
-require_relative 'comments'
 require_relative 'blog_post'
 require 'rack/cors'
 
