@@ -1,15 +1,18 @@
 #Grape Basic Project
 This project has the basic working structure for a **grape** application that connects to a MongoDB database.
 
+##Requirements
+
+  - Vagrant (from version 1.6.3 to 1.7.2)
+  - VirtualBox
+
 ##Setting up dev environment
 
 Run `$ vagrant up` to create the vm.
 
-After the machine is created, run `$ vagrant provision`. This will install the necessary software to get you up and running.
-
 We are using SaltStack as the provisioning tool. If you need to add new software to the app, you will have to add a Salt State file under `salt/roots/` folder.
 
-If you are not using Vagrant (but I recomend using it), you will need to install the following software in your machine:
+If you are not using Vagrant (but I recommend using it), you will need to install the following software in your machine:
   - Ruby 2
   - MongoDB
   - Manually run `$ bundle install` to download all the dependencies.
