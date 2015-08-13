@@ -3,12 +3,12 @@ require "rspec/core/rake_task"
 
 task :app do
   sh "cowsay '** Starting App on port 9292 **'"
-  sh "nohup rackup config.ru --host 0.0.0.0 --port 9292 > app.log &"
+  sh "./start.sh"
 end
 
 task :app_stop do
   sh "cowsay '** Stopping the App **'"
-  sh "pkill -f rackup"
+  sh "./stop.sh"
 end
 
 task :test_unit do
