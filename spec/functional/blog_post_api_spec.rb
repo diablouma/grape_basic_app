@@ -35,10 +35,9 @@ describe Grape::API do
 
     describe 'POST /api/blogPost' do
       it 'should save blog post content as sanitized html' do
-        @repository.delete_all :blog_posts
-        @unsecure_html_content = 'ohai! <div>div is safe</div><script>but script is not</script>'
+        unsecure_html_content = 'ohai! <div>div is safe</div><script>but script is not</script>'
 
-        post 'api/blogPosts', {'html' => @unsecure_html_content}
+        post 'api/blogPosts', {'html' => unsecure_html_content}
 
         expect(last_response.status).to eq 201
 
@@ -74,6 +73,7 @@ describe Grape::API do
 
     after :each do
       @repository.delete_all :comments
+      @repository.delete_all :blog_posts
     end
   end
 end
