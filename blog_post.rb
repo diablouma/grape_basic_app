@@ -13,7 +13,7 @@ module BlogPosts
       repository = RepositoryFactory.create_repository
 
       post do
-        sanitized_post =  BlogApiHelper.new().sanitize_html_in_post_content(params)
+        sanitized_post =  BlogApiHelper.new.sanitize_html_in_post_content params
 
         repository.insert :blog_posts, sanitized_post
         return repository.all :blog_posts
