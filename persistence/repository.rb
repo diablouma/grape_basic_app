@@ -22,17 +22,6 @@ class Repository
     @mongo_client[collection].drop
   end
 
-  def get_last collection
-    cursor = @mongo_client[collection].find
-    result = nil
-    cursor.each do |doc|
-      result = doc
-      break
-    end
-
-    return result
-  end
-
   def find_by_id collection, id
     cursor = @mongo_client[collection].find(:_id => BSON::ObjectId(id))
     found_doc = nil

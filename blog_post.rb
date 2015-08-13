@@ -19,11 +19,6 @@ module BlogPosts
         return repository.all :blog_posts
       end
 
-      get do
-        repository = RepositoryFactory.create_repository
-        return repository.get_last :blog_posts
-      end
-
       params do
         requires :_id, type: String
       end
