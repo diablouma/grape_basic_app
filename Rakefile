@@ -4,12 +4,12 @@ require_relative "blog_post"
 
 task :app do
   sh "cowsay '** Starting App on port 9292 **'"
-  sh "./start.sh"
+  sh "./scripts/start.sh"
 end
 
 task :app_stop do
   sh "cowsay '** Stopping the App **'"
-  sh "./stop.sh"
+  sh "./scripts/stop.sh"
 end
 
 task :test_unit do
