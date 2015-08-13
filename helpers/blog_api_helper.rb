@@ -11,7 +11,7 @@ class BlogApiHelper
   end
 
   def replace_with_secure_html post_to_insert
-    sanitized_html = @html_sanitizer.sanitize(post_to_insert["data"]["html"])
+    sanitized_html = @html_sanitizer.sanitize(post_to_insert["html"])
     post_to_insert["html"] = sanitized_html
     return post_to_insert
   end

@@ -38,7 +38,7 @@ describe Grape::API do
         @repository.delete_all :blog_posts
         @unsecure_html_content = 'ohai! <div>div is safe</div><script>but script is not</script>'
 
-        post 'api/blogPosts', data: {'html' => @unsecure_html_content}
+        post 'api/blogPosts', {'html' => @unsecure_html_content}
 
         expect(last_response.status).to eq 201
 
