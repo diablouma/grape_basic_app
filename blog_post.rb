@@ -1,6 +1,7 @@
 require 'grape'
 require 'json'
 require_relative 'factories/repository_factory'
+require_relative 'helpers/blog_api_helper'
 
 module BlogPosts
   class API < Grape::API
@@ -9,15 +10,26 @@ module BlogPosts
     prefix :api
 
     resource :blogPosts do
+      repository = RepositoryFactory.create_repository
+
       post do
-        repository = RepositoryFactory.create_repository
-        repository.insert :blog_posts, params
+        sanitized_post =  BlogApiHelper.new().sanitize_html_in_post_content(params)
+
+        repository.insert :blog_posts, sanitized_post
         return repository.all :blog_posts
       end
 
       get do
         repository = RepositoryFactory.create_repository
         return repository.get_last :blog_posts
+      end
+
+      params do
+        requires :_id, type: String
+      end
+
+      get '/:_id' do
+        repository.find_by_id :blog_posts, params["_id"]
       end
     end
 
