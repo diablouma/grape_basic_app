@@ -32,4 +32,14 @@ class Repository
 
     return result
   end
+
+  def find_by_id collection, id
+    cursor = @mongo_client[collection].find(:_id => BSON::ObjectId(id))
+    found_doc = nil
+    cursor.each do |doc|
+      found_doc = doc
+    end
+
+    return found_doc
+  end
 end

@@ -19,4 +19,17 @@ describe Repository do
 
     expect(posts).to eq expected_posts
   end
+
+  it "returns a post by its bson id" do
+    repository = Repository.new @mongo_client
+    post = Enumerator.new {|g| g.yield Hash["title", "amazing post 1"];}
+    allow(@collection).to receive(:find).with(:_id=>BSON::ObjectId("4db2ebee90036f010b000001"))
+                                              .and_return(post)
+
+    expected_post = {"title" => "amazing post 1"}
+
+    found_post = repository.find_by_id :blog_posts, "4db2ebee90036f010b000001"
+
+    expect(found_post).to eq expected_post
+  end
 end
