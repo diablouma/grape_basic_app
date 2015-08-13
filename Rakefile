@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
 require "rspec/core/rake_task"
+require_relative "blog_post"
 
 task :app do
   sh "cowsay '** Starting App on port 9292 **'"
@@ -33,6 +34,15 @@ task :test_functional do
     task.pattern = 'spec/functional/*_spec.rb'
   end
   Rake::Task["spec"].execute
+end
+
+desc "API Routes"
+task :routes do
+  BlogPosts::API.routes.each do |api|
+    method = api.route_method.ljust(10)
+    path = api.route_path
+    puts "     #{method} #{path}"
+  end
 end
 
 task :test => [:test_unit, :test_integration, :test_functional]
