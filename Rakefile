@@ -12,6 +12,8 @@ task :app_stop do
   sh "./scripts/stop.sh"
 end
 
+task :app_restart => [:app_stop, :app]
+
 task :test_unit do
   sh "cowsay Running unit tests"
   RSpec::Core::RakeTask.new :spec do |task|
