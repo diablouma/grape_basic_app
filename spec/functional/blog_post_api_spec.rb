@@ -33,7 +33,7 @@ describe Grape::API do
       end
     end
 
-    describe 'POST /api/blogPost' do
+    describe 'POST /api/blogPosts' do
       it 'should save blog post content as sanitized html' do
         unsecure_html_content = 'ohai! <div>div is safe</div><script>but script is not</script>'
 
@@ -44,6 +44,19 @@ describe Grape::API do
         last_inserted_post = get_last_inserted_post()
 
         expect(last_inserted_post["html"]).to eq("ohai! <div>div is safe</div>")
+      end
+    end
+
+    describe 'GET /api/vlogPosts' do
+      it 'should return a list of blog posts' do
+        @repository.insert :blog_posts, {'html' => 'some content'}
+        @repository.insert :blog_posts, {'html' => 'some other'}
+
+        get 'api/blogPosts'
+
+        posts = JSON.parse(last_response.body)
+
+        expect(posts.length).to eq(2)
       end
     end
 

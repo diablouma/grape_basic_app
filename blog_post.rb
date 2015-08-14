@@ -12,6 +12,9 @@ module BlogPosts
     resource :blogPosts do
       repository = RepositoryFactory.create_repository
 
+      params do
+        requires :html, type: String
+      end
       post do
         sanitized_post =  BlogApiHelper.new.sanitize_html_in_post_content params
 
@@ -19,10 +22,13 @@ module BlogPosts
         return repository.all :blog_posts
       end
 
+      get do
+        repository.all :blog_posts
+      end
+
       params do
         requires :_id, type: String
       end
-
       get '/:_id' do
         repository.find_by_id :blog_posts, params["_id"]
       end
