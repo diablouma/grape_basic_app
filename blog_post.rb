@@ -9,7 +9,7 @@ module BlogPosts
     format :json
     prefix :api
 
-    resource :blogPosts do
+    resource :blog_posts do
       repository = RepositoryFactory.create_repository
 
       params do

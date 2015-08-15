@@ -33,11 +33,11 @@ describe Grape::API do
       end
     end
 
-    describe 'POST /api/blogPosts' do
+    describe 'POST /api/blog_posts' do
       it 'should save blog post content as sanitized html' do
         unsecure_html_content = 'ohai! <div>div is safe</div><script>but script is not</script>'
 
-        post 'api/blogPosts', {'html' => unsecure_html_content}
+        post 'api/blog_posts', {'html' => unsecure_html_content}
 
         expect(last_response.status).to eq 201
 
@@ -47,12 +47,12 @@ describe Grape::API do
       end
     end
 
-    describe 'GET /api/vlogPosts' do
+    describe 'GET /api/blog_posts' do
       it 'should return a list of blog posts' do
         @repository.insert :blog_posts, {'html' => 'some content'}
         @repository.insert :blog_posts, {'html' => 'some other'}
 
-        get 'api/blogPosts'
+        get 'api/blog_posts'
 
         posts = JSON.parse(last_response.body)
 
@@ -60,12 +60,12 @@ describe Grape::API do
       end
     end
 
-    describe 'GET /api/blogPosts/:_id' do
+    describe 'GET /api/blog_posts/:_id' do
       it 'should return post by its key' do
         insert_unique_post_in_db()
         last_post_oid = get_last_inserted_post()["_id"]
 
-        get 'api/blogPosts/' + last_post_oid
+        get 'api/blog_posts/' + last_post_oid
         blog_post = JSON.parse(last_response.body)
 
         expect(last_response.status).to eq(200)
