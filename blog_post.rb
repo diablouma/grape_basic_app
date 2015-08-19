@@ -2,6 +2,7 @@ require 'grape'
 require 'json'
 require_relative 'factories/repository_factory'
 require_relative 'helpers/blog_api_helper'
+require './managers/file_manager'
 
 module BlogPosts
   class API < Grape::API
@@ -9,12 +10,21 @@ module BlogPosts
     format :json
     prefix :api
 
+    resource :images do
+      post do
+        file_manager = FileManager.new
+
+        return {"name" => file_manager.save_image(params['encoded_image'], params['image_type'])}
+      end
+    end
+
     resource :blog_posts do
       repository = RepositoryFactory.create_repository
 
       params do
         requires :html, type: String
       end
+
       post do
         sanitized_post =  BlogApiHelper.new.sanitize_html_in_post_content params
 
@@ -29,6 +39,7 @@ module BlogPosts
       params do
         requires :_id, type: String
       end
+
       get '/:_id' do
         repository.find_by_id :blog_posts, params["_id"]
       end

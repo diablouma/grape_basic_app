@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './managers/file_manager'
 
 describe Grape::API do
   include Rack::Test::Methods
@@ -82,6 +83,27 @@ describe Grape::API do
       @repository.delete_all :blog_posts
       first_post = {"html" => "<b>some text in bold</b>"}
       @repository.insert :blog_posts, first_post
+    end
+
+    describe 'POST /api/images' do
+      encoded_base_64_image = 'some_base_64_coded_info'
+      image_type = 'png'
+
+      before :each do
+        post 'api/images', {
+                            'encoded_image' => encoded_base_64_image,
+                            'image_type'=> image_type
+                           }
+      end
+
+      it 'should return an existant file' do
+        file_manager = FileManager.new
+        returned_file = JSON.parse(last_response.body)
+        complete_path = file_manager.build_complete_path_to_image(returned_file["name"])
+        expect(last_response.status).to eq(201)
+        expect(File.exists?(complete_path)).to eq(true)
+        File.delete(complete_path)
+      end
     end
 
     after :each do
